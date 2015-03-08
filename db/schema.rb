@@ -11,8 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326015328) do
-
   create_table "links", force: :cascade do |t|
     t.string   "short_url"
     t.string   "long_url"

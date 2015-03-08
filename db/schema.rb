@@ -31,9 +31,12 @@ ActiveRecord::Schema.define(version: 20150326015328) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "uid"
+<<<<<<< HEAD
     t.string   "twitter_token"
     t.string   "twitter_secret"
     t.string   "api_key"
+=======
+>>>>>>> Adds omniauth-twitter for authentication
   end
 
 end

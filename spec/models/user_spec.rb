@@ -22,6 +22,7 @@ describe User do
       expect(User.from_twitter(auth).name).to eq 'test_user'
     end
   end
+<<<<<<< HEAD
 
   context "#tweet" do
     it "sends a tweet" do
@@ -30,4 +31,6 @@ describe User do
       expect(twoot.id).to eq 243145735212777472 
     end
   end
+=======
+>>>>>>> Adds omniauth-twitter for authentication
 end

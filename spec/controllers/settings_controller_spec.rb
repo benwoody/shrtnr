@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+<<<<<<< HEAD
 describe SettingsController do
 
   let(:user) { create(:user) }

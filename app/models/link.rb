@@ -1,5 +1,5 @@
 class Link < ActiveRecord::Base
-  attr_accessor :tweet
+  attr_accessor :tweet, :url
 
   before_create :build_short_url
 
@@ -10,6 +10,10 @@ class Link < ActiveRecord::Base
 
   def to_params
     short_url
+  end
+
+  def url
+    long_url
   end
 
   private

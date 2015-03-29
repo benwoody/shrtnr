@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :links, only: [:show, :create]
       resources :users, only: [:show]
+      get 'links/create'
     end
   end
 

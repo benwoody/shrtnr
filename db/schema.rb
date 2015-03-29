@@ -11,11 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-=======
 ActiveRecord::Schema.define(version: 20150326015328) do
 
->>>>>>> add api/v1/links to work with 3rd party services
   create_table "links", force: :cascade do |t|
     t.string   "short_url"
     t.string   "long_url"

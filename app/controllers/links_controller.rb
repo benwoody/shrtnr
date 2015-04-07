@@ -23,9 +23,12 @@ class LinksController < ApplicationController
     end
 
     if @link.save
-      redirect_to link_path(@link.short_url), notice: "URL added"
+      #redirect_to link_path(@link.short_url), notice: "URL added"
+      redirect_to root_url, notice: "URL added"
     else
-      render root_url, error: "Your URL was not valid"
+      #render root_url, error: "Your URL was not valid"
+      #redirect_to root_url, notice: "Your URL was not valid"
+      redirect_to root_url, alert: "Your URL was not valid"
     end
   end
 

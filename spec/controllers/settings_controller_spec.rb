@@ -1,32 +1,34 @@
  require 'spec_helper'
 
-describe SessionsController do
+describe SettingsController, type: :controller do
+   
+  let(:user) { FactoryGirl.create(:user) }
 
-  let(:user) { create(:user) }
+  let(:settings_params) do
+    {
+      name: 'name',
+      email:  'e@m.com'
+    }
+   end
 
-  describe "#direct" do
-    it "redirects to dashboard_path if signed_in?" do
-      sign_in(user)
-      get :direct
-      expect(response).to redirect_to(dashboard_path)
-    end
-
-    it "redirects to home_path if not signed_in?" do
-      get :direct
-      expect(response).to redirect_to(home_path)
-    end
-      
-  end
-
-  describe "#new" do
-    it "is successful" do
-      get :new
+  describe "#index" do
+    it "settings for signed_in user?" do
+      get :index
       expect(response).to be_success
     end
+  end
+
+  describe "#update" do
+    it "is successful" do
+      pending("Need more detailed approach")
+      user.update_attributes(settings_params)
+      post :update
+      #user.update_attributes(settings_params)
+      expect(response).to redirect_to(settings_url)
+    end
 
   end
 
-  describe "#destroy" do
-  end
 
+  
 end

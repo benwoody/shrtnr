@@ -5,6 +5,7 @@ describe "creating a user" do
 
     before do
       visit "/users/new"
+      fill_in "Name", with: "TestOne"
       fill_in "Email", with: "test@test.com"
       fill_in "Password", with: "Password"
       fill_in "Password confirmation", with: "Password"
@@ -20,10 +21,11 @@ describe "creating a user" do
     end
   end
 
-  context "with invalid params" do
+  context "with invalid password params" do
 
     before do
       visit "/users/new"
+      fill_in "Name", with: "TestOne"
       fill_in "Email", with: "test@test.com"
       fill_in "Password", with: "Password"
       fill_in "Password confirmation", with: "NOPE"
@@ -34,4 +36,39 @@ describe "creating a user" do
       expect(page).to have_content "Password confirmation doesn't match Password"
     end
   end
+
+  context "with invalid name param" do
+
+    before do
+      visit "/users/new"
+      fill_in "Name", with: ""
+      fill_in "Email", with: "test@test.com"
+      fill_in "Password", with: "Password"
+      fill_in "Password confirmation", with: "Password"
+      click_button "Submit"
+    end
+
+    it "tells the user they made a mistake" do
+      expect(page).to have_content "Name can't be blank"
+    end
+  end
+ 
+  context "with invalid email param" do
+
+    before do
+      visit "/users/new"
+      fill_in "Name", with: "TestOne"
+      fill_in "Email", with: ""
+      fill_in "Password", with: "Password"
+      fill_in "Password confirmation", with: "Password"
+      click_button "Submit"
+    end
+
+    it "tells the user they made a mistake" do
+      expect(page).to have_content "Email can't be blank"
+    end
+  end
+ 
+
+
 end

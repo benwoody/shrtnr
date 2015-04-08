@@ -26,9 +26,6 @@ describe "creating a short url" do
   end
 
 
-
-
-
   context "when signed in" do
     let(:user) { create(:user) }
 

@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe "creating a short url" do
   context "when not signed in" do
-  	before do
-    	visit "/home"
+    before do
+      visit "/home"
       fill_in "long_url", with: "http://foo.com"
       click_button "Shorten It!"
-  	end
+    end
 
     it "shortens an url by displaying the short link" do
       expect(page).to have_content "links to http://foo.com"

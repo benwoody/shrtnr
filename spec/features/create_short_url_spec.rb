@@ -42,5 +42,11 @@ describe "creating a short url" do
       expect(page).to have_content url
     end
 
+    it "should display the link on the dashboard page" do
+      page.find_link("DASHBOARD").click
+      expect(current_path).to eq "/dashboard"
+      expect(page).to have_content url
+    end
+
   end
 end

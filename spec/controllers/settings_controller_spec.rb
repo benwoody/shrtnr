@@ -15,7 +15,7 @@ describe SessionsController do
       get :direct
       expect(response).to redirect_to(home_path)
     end
-      
+
   end
 
   describe "#new" do
@@ -25,8 +25,4 @@ describe SessionsController do
     end
 
   end
-
-  describe "#destroy" do
-  end
-
 end

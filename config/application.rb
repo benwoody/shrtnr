@@ -6,6 +6,15 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Configure Twitter
+if Rails.env == 'production'
+  TWITTER = { client_id: ENV['client_id'], client_secret: ENV['client_secret'] }
+else
+  TWITTER = YAML.load(File.read(File.expand_path('../twitter.yml', __FILE__)))
+  TWITTER.merge! TWITTER.fetch(Rails.env, {})
+  TWITTER.symbolize_keys!
+end
+
 module Shortener
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

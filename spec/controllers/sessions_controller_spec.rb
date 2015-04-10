@@ -34,6 +34,45 @@ describe SessionsController, type: :controller do
     end
   end
 
+  describe "#twitter" do
+
+    context "with invalid credentials" do
+      before do
+        OmniAuth.config.mock_auth[:twitter] = :invalid_credentials
+        get :failure
+      end
+
+      it "redirects to root_url" do
+        expect(response).to redirect_to(root_path)
+      end
+
+      it "has flash alert" do
+        expect(flash[:alert]).to eq "Authentication Failed"
+      end
+    end
+
+    context "with valid credentials" do
+      before do
+        OmniAuth.config.add_mock(:twitter, { uid: '12345' })
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
+      end
+
+      it "creates user unless user exists" do
+        expect { get :twitter }.to change(User, :count).by(1)
+      end
+
+      it "signs in a user" do
+        get :twitter
+        expect(signed_in?).to be_truthy
+      end
+
+      it "has a flash notice" do
+        get :twitter
+        expect(flash[:notice]).to eq "You have been logged in through Twitter."
+      end
+    end
+  end
+
   describe "#destroy" do
 
     before do
@@ -47,6 +86,9 @@ describe SessionsController, type: :controller do
 
     it "redirects to root_url" do
       expect(response).to redirect_to(root_url)
+    end
+
+    it "has flash notice" do
       expect(flash[:notice]).to eq "You have been logged out."
     end
   end

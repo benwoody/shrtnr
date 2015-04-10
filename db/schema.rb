@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115013538) do
+ActiveRecord::Schema.define(version: 20150308201918) do
 
   create_table "links", force: :cascade do |t|
     t.string   "short_url"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150115013538) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "uid"
   end
 
 end

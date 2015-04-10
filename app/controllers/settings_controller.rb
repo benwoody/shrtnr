@@ -1,7 +1,7 @@
 class SettingsController < ApplicationController
-  include SettingsHelper
+  include SessionsHelper
 
-  #before_action :authentication_required
+  before_action :authentication_required
 
   def index
     @settings = current_user

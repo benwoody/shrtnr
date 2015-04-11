@@ -16,6 +16,8 @@
 //= require turbolinks
 //= require_tree .
 
+
+
 window.setTimeout((function() {
     $(".alert").slideUp(500, function() { 
         $(this).remove();

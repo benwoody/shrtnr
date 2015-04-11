@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe SessionsController, type: :controller do
 
-  let(:user) { User.create!(email: 'test@test.com', password: "Password",
+  let(:user) { User.create!(name: 'TestOne', email: 'test@test.com', password: "Password",
                             password_confirmation: "Password")
   }
 

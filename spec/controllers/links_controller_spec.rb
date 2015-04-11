@@ -7,6 +7,14 @@ describe LinksController, type: :controller do
   let(:attrs) { link.attributes }
 
   describe "#create" do
+    
+    it "displays message if long_url is empty" do
+      attrs[:long_url] = ""
+      expect { post :create, link: attrs }.to change(Link, :count).by(0)
+      expect(response).to redirect_to(root_url)
+      #xpect(flash[:alert]).to eq 'Your URL was not valid'
+    end
+     
     it "changes count if long_url does not exist" do
       attrs[:long_url] = "http://yahoo.com"
       expect { post :create, link: attrs }.to change(Link, :count).by(1)
@@ -21,6 +29,13 @@ describe LinksController, type: :controller do
   describe "#create when signed in" do
     before do
       allow(self.controller).to receive(:current_user).and_return(user)
+    end
+
+    it "displays message if long_url is empty" do
+      attrs[:long_url] = ""
+      expect { post :create, link: attrs }.to change(Link, :count).by(0)
+      expect(response).to redirect_to(root_url)
+      expect(flash[:alert]).to eq 'Your URL was not valid'
     end
 
     it "changes count if long_url does not exist" do

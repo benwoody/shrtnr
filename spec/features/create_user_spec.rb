@@ -5,6 +5,7 @@ describe "creating a user" do
 
     before do
       visit "/users/new"
+
       fill_in "Email", with: "test@test.com"
       fill_in "Password", with: "Password"
       fill_in "Password confirmation", with: "Password"
@@ -24,6 +25,7 @@ describe "creating a user" do
 
     before do
       visit "/users/new"
+      fill_in "Name", with: "TestOne"
       fill_in "Email", with: "test@test.com"
       fill_in "Password", with: "Password"
       fill_in "Password confirmation", with: "NOPE"

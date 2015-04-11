@@ -20,7 +20,7 @@ describe "creating a user" do
     end
   end
 
-  context "with invalid params" do
+  context "with non matching password" do
 
     before do
       visit "/users/new"
@@ -32,6 +32,21 @@ describe "creating a user" do
 
     it "tells the user they made a mistake" do
       expect(page).to have_content "Password confirmation doesn't match Password"
+    end
+  end
+
+  context "with invalid email" do
+
+    before do
+      visit "/users/new"
+      fill_in "Email", with: "test"
+      fill_in "Password", with: "Password"
+      fill_in "Password confirmation", with: "Password"
+      click_button "Submit"
+    end
+
+    it "tells the user they made a mistake" do
+      expect(page).to have_content "Email Address is invalid."
     end
   end
 end

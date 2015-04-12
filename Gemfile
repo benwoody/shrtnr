@@ -17,6 +17,10 @@ gem 'bcrypt-ruby'
 gem 'omniauth-twitter'
 gem 'twitter'
 
+gem 'foreman'
+gem 'sidekiq'
+gem 'sinatra', :require => nil
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

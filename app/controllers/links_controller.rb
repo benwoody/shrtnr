@@ -56,7 +56,8 @@ class LinksController < ApplicationController
 
     def create_tweet
       if current_user && signed_in_through_twitter? && params[:link][:tweet] == '1'
-        current_user.tweet("Check out my new link: #{full_url(@link)}")
+        text = "Check out my new link: #{full_url(@link)}"
+        TwitterJob.perform_later(current_user.id, text)
       end
     end
 end

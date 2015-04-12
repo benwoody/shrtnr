@@ -34,15 +34,11 @@ describe LinksController, type: :controller do
       expect { post :create, link: attrs }.to change(user.links, :count).by(1)
     end
 
-    it "tweets the url" do
+    it "creates a TwitterJob" do
       stub_tweet
-      post :create, link: attrs.merge(tweet: '1')
-      expect(WebMock).to have_requested(:post, /api.twitter.com/)
-    # it "creates a TwitterJob" do
-    #   stub_tweet
-    #     expect {
-    #       post :create, link: attrs.merge(tweet: '1')
-    #     }.to change(enqueued_jobs, :size).by(1)
+        expect {
+          post :create, link: attrs.merge(tweet: '1')
+        }.to change(enqueued_jobs, :size).by(1)
     end
   end
 

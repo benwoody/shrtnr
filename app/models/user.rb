@@ -14,4 +14,9 @@ class User < ActiveRecord::Base
       user.password = SecureRandom.hex
     end
   end
+
+  def has_uid?
+    !@uid.to_s == ''
+  end
+
 end

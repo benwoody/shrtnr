@@ -14,4 +14,5 @@ class User < ActiveRecord::Base
       user.password = SecureRandom.hex
     end
   end
+  
 end

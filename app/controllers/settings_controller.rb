@@ -16,9 +16,14 @@ class SettingsController < ApplicationController
     end
   end
 
+  def add_twitter
+    session[:add_twitter] = true
+    redirect_to "/auth/twitter"
+  end
+
   private
 
     def settings_params
-      params.require(:settings).permit(:name, :email)
+      params.require(:settings).permit(:name, :email, :uid)
     end
 end

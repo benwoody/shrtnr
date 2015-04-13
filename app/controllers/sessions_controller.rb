@@ -25,12 +25,44 @@ class SessionsController < ApplicationController
   end
 
   def twitter
+    add_twitter = session[:add_twitter]
+    session.delete :add_twitter
+
     auth = request.env["omniauth.auth"]
-    user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
+
+    # sign in via twitter
+    user = User.where(uid: auth["uid"]).first
     if user
-      session[:user_id] = user.id
-      flash[:notice] = "You have been logged in through Twitter."
-      redirect_back_or root_url
+      if add_twitter
+        # trying to add a twitter uid, but another user is already using it
+        flash[:alert] = "You've already created a shrtnr account using this Twitter id"
+        redirect_to settings_url #, error: "You've already created a shrtnr account using this Twitter id"
+      else
+        session[:user_id] = user.id
+        flash[:notice] = "You have been logged in through Twitter."
+        redirect_back_or root_url
+      end
+    else
+      if add_twitter
+        # adding twitter credentials to the current user
+        user = current_user
+        if user
+          user.uid = auth["uid"]
+          if user.save
+            flash[:notice] = "You have added Twitter credentials to your account"
+            redirect_back_or root_url
+          else
+            flash[:alert] = "Failed to add Twitter credentials to your account"
+            redirect_back_or root_url
+          end
+        end
+      else
+        # creating a new user from a twitter id
+        user = User.from_twitter(auth)
+        session[:user_id] = user.id
+        flash[:notice] = "You have created an account using your Twitter id."
+        redirect_back_or root_url
+      end
     end
   end
 

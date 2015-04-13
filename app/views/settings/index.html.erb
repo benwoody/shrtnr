@@ -16,6 +16,9 @@
             <%= f.email_field :email, class: "form-control input-lg" %>
           </div>
           <div class="actions">
+            <% if current_user.uid.to_s == '' %>
+              <%= link_to "Add Twitter", :add_twitter, method: :put, class: 'btn-lg btn-primary btn-block text-center' %>
+            <% end %>
             <%= f.submit "Update", class: "btn-lg btn-primary btn-block" %>
           </div>
         <% end %>

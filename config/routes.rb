@@ -13,10 +13,12 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   get '/settings' => 'settings#index', as: :settings
   post '/settings' => 'settings#update'
+  put 'settings/add_twitter' => 'settings#add_twitter', as: :add_twitter
 
   resources :links, only: [:create, :show, :redirection, :destroy]
 
   get '/:id' => 'links#redirection', as: :redirect_url
 
   root 'sessions#direct'
+
 end

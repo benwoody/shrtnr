@@ -38,19 +38,9 @@ describe "creating a short url" do
        expect(page).to have_content url
     end 
 
-    it "should have the link in the database" do
-      entry = Link.find_by long_url: url
-      expect(entry).to be_truthy
-      @short = entry.short_url
-    end 
-
     it "should be linkable to the dashboard" do
       page.find_link("DASHBOARD").click
     end
-
-    it "should have the short link" do
-      expect(page).to have_content @short
-    end 
 
     it "should have the long link" do
       expect(page).to have_content url

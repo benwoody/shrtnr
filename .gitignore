@@ -20,3 +20,6 @@
 # Ignore secrets!
 /config/secrets.yml
 /config/twitter.yml
+
+# Ignore .idea
+/.idea

@@ -1,28 +1,23 @@
 require 'spec_helper'
 
-describe SessionsController do
+describe SettingsController, type: :controller do
 
-  let(:user) { create(:user) }
+  let(:user) { User.create!(email: 'test@test.com', password: "Password",
+                            password_confirmation: "Password")
+  }
 
-  describe "#direct" do
-    it "redirects to dashboard_path if signed_in?" do
-      sign_in(user)
-      get :direct
-      expect(response).to redirect_to(dashboard_path)
+  describe "#add_twitter" do
+    context "with valid credentials" do
+      before do
+        OmniAuth.config.add_mock(:twitter, { uid: '12345' })
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter]
+      end
+
+      it "adds a uid to User" do
+        # I expected the session to exist, but it does not
+        # put :add_twitter
+        # puts session[:add_twitter]
+      end
     end
-
-    it "redirects to home_path if not signed_in?" do
-      get :direct
-      expect(response).to redirect_to(home_path)
-    end
-
-  end
-
-  describe "#new" do
-    it "is successful" do
-      get :new
-      expect(response).to be_success
-    end
-
   end
 end

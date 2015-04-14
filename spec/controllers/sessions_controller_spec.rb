@@ -68,7 +68,7 @@ describe SessionsController, type: :controller do
 
       it "has a flash notice" do
         get :twitter
-        expect(flash[:notice]).to eq "You have been logged in through Twitter."
+        expect(flash[:notice]).to eq "You have created an account using your Twitter id."
       end
     end
   end

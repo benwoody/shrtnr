@@ -15,8 +15,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  def has_uid?
-    !@uid.to_s == ''
-  end
-
 end

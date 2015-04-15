@@ -15,12 +15,10 @@
             <%= f.label :email %>
             <%= f.email_field :email, class: "form-control input-lg" %>
           </div>
-<% if @settings.has_uid? %>
-  <p>Has uid</p>
-<% else %>
-  <p>Does not have uid</p>
-<% end %>
-  <p><%= "Test: #{@settings.uid}" %></p>
+          <div class="form-group">
+            <%= f.label :uid, "Twitter ID" %><span class="note"><% if @settings.uid.to_s == "" %>Add Twitter user ID to associate with a Twitter account<% else %>Clear to remove Twitter association<% end %></span>
+            <%= f.number_field :uid, class: "form-control input-lg" %>
+          </div>
           <div class="actions">
             <%= f.submit "Update", class: "btn-lg btn-primary btn-block" %>
           </div>

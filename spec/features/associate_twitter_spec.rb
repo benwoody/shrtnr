@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Twitter association" do
 
-  context "not yet linked to Twitter" do
+  context "can link to Twitter" do
 
     before do
       visit "/users/new"
@@ -22,7 +22,12 @@ describe "Twitter association" do
     end
 
     it "should have the Twitter user id" do
-      expect(page).to have_selector("input", exact: "1234")
+      #expect(page).to have_selector("input", exact: "1234")
+
+      #expect(page).to have_field "settings[uid]"
+      #expect(page).to have_field "Twitter ID"
+      #expect(page).to have_field "settings_uid"
+      expect(page).to have_selector("input#settings_uid")
     end
 
 #    it "should be able to remove a Twitter id" do

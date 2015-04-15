@@ -19,6 +19,7 @@ gem 'twitter'
 
 gem 'foreman'
 gem 'sidekiq'
+gem 'whenever', :require => nil
 gem 'sinatra', :require => nil
 
 group :development, :test do

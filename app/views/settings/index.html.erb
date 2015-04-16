@@ -19,6 +19,9 @@
             <%= f.submit "Update", class: "btn-lg btn-primary btn-block" %>
           </div>
         <% end %>
+          <% unless current_user.twitter_linked? %>
+            <%= link_to "Link Account to Twitter", "/auth/twitter", class: 'btn-lg btn-primary btn-block text-center' %>
+          <% end %>
       </div>
     </div>
   </div>

@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'auth/twitter/callback', to: 'sessions#twitter', as: :twitter_auth
   get 'auth/failure', to: 'sessions#failure'
 
+  get 'auth/delink', to: 'sessions#twitter_delink'
+
   resources :users, only: [:new, :create]
   get '/settings' => 'settings#index', as: :settings
   post '/settings' => 'settings#update'

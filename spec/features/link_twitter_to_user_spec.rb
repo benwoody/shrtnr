@@ -39,7 +39,7 @@ describe "link twitter to existing user account" do
     it "adds twitter to user account" do
       click_link "Link Account to Twitter"
       expect(page).to have_content("You may now sign in with your twitter account.")
-      expect(User.find_by(email: 'jon12@test.com').uid).to eq('1234')
+      expect(User.find_by(email: 'jon12@test.com').uid).not_to be_nil
     end
   end
 end

@@ -26,12 +26,20 @@ class SessionsController < ApplicationController
 
   def twitter
     auth = request.env["omniauth.auth"]
-    user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
+
+    user = current_user
+
     if user
+      user.link_twitter(auth)
+      flash[:notice] = "You have associated your Twitter account."
+      redirect_to settings_path
+    else
+      user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
       session[:user_id] = user.id
       flash[:notice] = "You have been logged in through Twitter."
       redirect_back_or root_url
-    end
+    end 
+ 
   end
 
   def failure

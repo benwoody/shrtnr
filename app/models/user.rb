@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
       user.password = SecureRandom.hex
     end
   end
+
+  def link_twitter(auth)
+    update(uid: auth.uid)
+  end 
 end

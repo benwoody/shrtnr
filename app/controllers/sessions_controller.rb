@@ -26,12 +26,27 @@ class SessionsController < ApplicationController
 
   def twitter
     auth = request.env["omniauth.auth"]
-    user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
-    if user
-      session[:user_id] = user.id
-      flash[:notice] = "You have been logged in through Twitter."
-      redirect_back_or root_url
+
+    if current_user
+      current_user.update_attribute(:uid, auth["uid"])
+      flash[:notice] = "Your account has been linked to Twitter"
+      redirect_to settings_path
+    else
+      user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
+      if user
+        session[:user_id] = user.id
+        flash[:notice] = "You have been logged in through Twitter."
+        redirect_back_or root_url
+      end
     end
+  end
+
+  def twitter_delink
+    if current_user
+      current_user.update_attribute(:uid, nil)
+      flash[:notice] = "Your account has been unlinked from Twitter"
+      redirect_to settings_path
+    end 
   end
 
   def failure

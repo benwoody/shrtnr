@@ -22,6 +22,8 @@ gem 'sidekiq'
 gem 'whenever', :require => nil
 gem 'sinatra', :require => nil
 
+gem 'rack-mini-profiler', require: false
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

@@ -47,5 +47,18 @@ describe SettingsController do
       }.to change(ActionMailer::Base.deliveries, :count).by(1)
     end
 
+    it "sent notification email contains old and new name values" do
+      attrs = { name: "Ralph Tirebiter" }
+      put :update, settings: attrs
+      expect(ActionMailer::Base.deliveries.last.html_part.body).to include("Old name:")
+      expect(ActionMailer::Base.deliveries.last.html_part.body).to include("New name: Ralph Tirebiter")
+    end
+
+    it "sent notification email contains old and new email values" do
+      attrs = { email: "ralph@tirebiter.com" }
+      put :update, settings: attrs
+      expect(ActionMailer::Base.deliveries.last.html_part.body).to include("Old email:")
+      expect(ActionMailer::Base.deliveries.last.html_part.body).to include("New email: ralph@tirebiter.com")
+    end
   end
 end

@@ -1,5 +1,10 @@
 Your settings have changed
-
-@user.email
-
 You have successfully updated your settings.
+<% if @user.name != @previous_settings.name %>
+Old name: <%= @previous_settings.name %>
+New name: <%= @user.name %>
+<% end %>
+<% if @user.email != @previous_settings.email %>
+Old email: <%= @previous_settings.email %>
+New email: <%= @user.email %>
+<% end %>

@@ -34,9 +34,10 @@ describe LinksController, type: :controller do
     end
 
     it "tweets the url" do
-      stub_tweet
+      stub_tweet # Call the method in spec/support/twitter.rb to establish the stub
       post :create, link: attrs.merge(tweet: '1')
       expect(WebMock).to have_requested(:post, /api.twitter.com/)
+      #Rather than testing the call itself, just check that the post was made.
     end
   end
 

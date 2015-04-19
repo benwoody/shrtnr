@@ -21,6 +21,7 @@ describe UsersController, type: :controller do
       expect {
         post :create, user: attributes
       }.to change(ActionMailer::Base.deliveries, :count).by(1)
+      # Check that the outbox count increases by 1
     end
   end
 end

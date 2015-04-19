@@ -1,0 +1,11 @@
+<%= image_tag attachments['logo.png'].url, alt: 'Logo' %>
+<h2>Your settings have changed</h2>
+<p>You have successfully updated your settings.</p>
+<% if @user.name != @previous_settings.name %>
+<p>Old name: <%= @previous_settings.name %></p>
+<p>New name: <%= @user.name %></p>
+<% end %>
+<% if @user.email != @previous_settings.email %>
+<p>Old email: <%= @previous_settings.email %></p>
+<p>New email: <%= @user.email %></p>
+<% end %>

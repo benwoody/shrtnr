@@ -1,0 +1,18 @@
+<%= image_tag attachments['logo.png'].url, alt: 'Logo' %>
+
+<p>Your settings at Shrt.nr have been changed:
+<% if @user.name != @previous.name %>
+  <ul>
+    <li>Old name: <b><%= @previous.name %></b></li>
+    <li>New name: <b><%= @user.name %></b></li>
+  </ul>
+<% end %>
+<% if @user.email != @previous.email %>
+  <ul>
+    <li>Old email: <b><%= @previous.email %></b></li>
+    <li>New email: <b><%= @user.email %></b></li>
+  </ul>
+<% end %>
+
+<p>If you are not the one who made these changes, please notify
+the administrators of Shrt.nr.</p>

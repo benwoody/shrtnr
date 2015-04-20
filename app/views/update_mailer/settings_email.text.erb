@@ -1,0 +1,13 @@
+Your settings at Shrt.nr have been changed:
+<% if @user.name != @previous.name %>
+
+    Old name: <%= @previous.name %>
+    New name: <%= @user.name %>
+<% end %><% if @user.email != @previous.email %>
+
+    Old email: <%= @previous.email %>
+    New email: <%= @user.email %>
+<% end %>
+
+If you are not the one who made these changes, please notify
+the administrators of Shrt.nr.

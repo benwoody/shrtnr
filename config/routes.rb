@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'dashboard' => 'dashboards#index', as: :dashboard
   get 'home' => 'dashboards#home', as: :home
+  
+  get 'addhoctweet/:id' => 'links#ad_hoc_tweet', as: :ad_hoc_tweet
 
   get 'login' => 'sessions#new', as: :login
   post 'login' => 'sessions#create'

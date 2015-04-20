@@ -46,6 +46,17 @@ describe LinksController, type: :controller do
       expect(response).to be_success
     end
   end
+  
+  describe "#ad_hoc_tweet" do
+    before do
+      allow(self.controller).to receive(:current_user).and_return(user)
+    end
+    it "sends a tweet" do
+      stub_tweet
+      get :ad_hoc_tweet, id: link.id.to_s
+      expect(WebMock).to have_requested(:post, /api.twitter.com/)
+    end
+  end
 
   describe "#redirection" do
     it "is successful" do

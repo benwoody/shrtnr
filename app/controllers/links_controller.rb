@@ -39,6 +39,15 @@ class LinksController < ApplicationController
     @link.save
     redirect_to @link.long_url
   end
+  
+  def ad_hoc_tweet 
+    if current_user && signed_in_through_twitter?
+      link = Link.find_by_id(params[:id])
+      current_user.tweet("Check out my new link: #{full_url(link)}")
+      flash[:notice] = "Tweet Sent!"
+    end
+    redirect_to dashboard_path
+  end
 
   private
 

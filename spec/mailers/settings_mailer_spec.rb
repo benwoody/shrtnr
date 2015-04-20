@@ -9,11 +9,11 @@ describe SettingsMailer, :type => :mailer do
     it "renders the correct headers" do
       expect(mail.from).to include "skostojohn@hotmail.com"
       expect(mail.to).to include user.email
-      expect(mail.subject).to include "Shrtnr Settings Change Confirmation"
+      expect(mail.subject).to include "Confirmation - Shortener Settings Change"
     end
 
     it "renders an html layout" do
-      expect(mail.html_part.body).to include "updated your shrtnr settings"
+      expect(mail.html_part.body).to include "updated your Shortener settings"
     end
   end
 end

@@ -39,5 +39,26 @@ describe SettingsController do
       expect(assigns(:settings).name).to eq attrs[:name]
       expect(assigns(:settings).email).to eq attrs[:email]
     end
+
+    it "sends an email that a change has been made" do
+      attrs = {name: "Alvin Aardvark", email: "aa@gmail.com" }
+      expect {
+        put :update, settings: attrs
+      }.to change(ActionMailer::Base.deliveries, :count).by(1)
+    end
+
+    it "sends an email noting a change in name" do
+      attrs = {name: "Alvin Aardvark" }
+      put :update, settings: attrs
+      expect(ActionMailer::Base.deliveries.last.html_part.body).to include("Old name:")
+      expect(ActionMailer::Base.deliveries.last.html_part.body).to include("New name: <b>Alvin Aardvark</b>")
+    end
+
+    it "sends an email noting a change in email" do
+      attrs = {email: "aa@gmail.com" }
+      put :update, settings: attrs
+      expect(ActionMailer::Base.deliveries.last.html_part.body).to include("Old email:")
+      expect(ActionMailer::Base.deliveries.last.html_part.body).to include("New email: <b>aa@gmail.com</b>")
+    end
   end
 end

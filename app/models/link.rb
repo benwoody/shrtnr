@@ -1,4 +1,6 @@
 class Link < ActiveRecord::Base
+  attr_accessor :tweet
+
   before_create :build_short_url
 
   belongs_to :user

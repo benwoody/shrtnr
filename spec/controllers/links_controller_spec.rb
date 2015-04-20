@@ -32,12 +32,29 @@ describe LinksController, type: :controller do
       post :create, link: attrs
       expect { post :create, link: attrs }.to change(user.links, :count).by(1)
     end
+
+    it "tweets the url" do
+      stub_tweet
+      post :create, link: attrs.merge(tweet: '1')
+      expect(WebMock).to have_requested(:post, /api.twitter.com/)
+    end
   end
 
   describe "#show" do
     it "is successful" do
       get :show, id: link.short_url
       expect(response).to be_success
+    end
+  end
+  
+  describe "#ad_hoc_tweet" do
+    before do
+      allow(self.controller).to receive(:current_user).and_return(user)
+    end
+    it "sends a tweet" do
+      stub_tweet
+      get :ad_hoc_tweet, id: link.id.to_s
+      expect(WebMock).to have_requested(:post, /api.twitter.com/)
     end
   end
 

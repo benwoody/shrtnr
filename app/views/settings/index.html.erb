@@ -18,8 +18,10 @@
           <div class="actions">
             <%= f.submit "Update", class: "btn-lg btn-primary btn-block" %>
           </div>
-          <h4 class="text-center">or</h4>
-          <%= link_to "Sign in with Twitter", "/auth/twitter", class: 'btn-lg btn-primary btn-block text-center' %>
+            <% unless current_user.uid %>
+              <h4 class="text-center">or</h4>
+              <%= link_to "Link To Your Twitter Account", "/auth/twitter", class: 'btn-lg btn-primary btn-block text-center' %>
+            <% end %>
         <% end %>
       </div>
     </div>

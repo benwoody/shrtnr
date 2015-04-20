@@ -1,0 +1,2 @@
+class SettingsMailer < ApplicationMailer
+end

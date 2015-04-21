@@ -1,3 +1,4 @@
+# Links controller class
 class LinksController < ApplicationController
   include LinksHelper
   include SessionsHelper
@@ -23,9 +24,9 @@ class LinksController < ApplicationController
     end
 
     if @link.save
-      redirect_to link_path(@link.short_url), notice: "URL added"
+      redirect_to link_path(@link.short_url), notice: 'URL added'
     else
-      redirect_to root_url, alert: "Your URL was not valid"
+      redirect_to root_url, alert: 'Your URL was not valid'
     end
   end
 
@@ -40,11 +41,11 @@ class LinksController < ApplicationController
 
   private
 
-    def find_link
-      @link = Link.find_by_short_url(params[:id])
-    end
+  def find_link
+    @link = Link.find_by_short_url(params[:id])
+  end
 
-    def link_params
-      params.require(:link).permit(:long_url)
-    end
+  def link_params
+    params.require(:link).permit(:long_url)
+  end
 end

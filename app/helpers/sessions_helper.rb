@@ -1,3 +1,4 @@
+# Session helper module
 module SessionsHelper
 
   def current_user
@@ -11,7 +12,7 @@ module SessionsHelper
   def authentication_required
     unless signed_in?
       store_location
-      redirect_to login_url, notice: "Please sign in"
+      redirect_to login_url, notice: 'Please sign in'
     end
   end
 

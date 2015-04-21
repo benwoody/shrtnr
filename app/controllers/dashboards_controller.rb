@@ -1,3 +1,4 @@
+# Dashboard controller class
 class DashboardsController < ApplicationController
   include SessionsHelper
   include LinksHelper

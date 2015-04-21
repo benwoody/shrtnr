@@ -20,7 +20,7 @@ gem 'twitter'
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
-  gem 'spring'
+  gem 'spring', '1.3.4'
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara', '~> 2.4.0'
   gem 'factory_girl'

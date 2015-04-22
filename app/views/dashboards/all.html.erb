@@ -1,0 +1,26 @@
+<table id="link_table" class="table table-striped table-bordered table-responsive">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>URL</th>
+      <th>Shortened</th>
+      <th>Clicks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @links.find_each(batch_size: 10) do |link| %>
+      <tr>
+        <td>
+        <% if link.user.present? %>
+          <%= link.user.name %>
+        <% else %>
+          No user
+        <% end %>
+        </td>
+        <td><%= link.long_url %></td>
+        <td><%= link_to full_url(link), link_path(link.short_url) %></td>
+        <td><%= link.clicks %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

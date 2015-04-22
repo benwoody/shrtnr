@@ -10,4 +10,8 @@ class DashboardsController < ApplicationController
   def home
     @link = Link.new
   end
+
+  def all
+    @links = Link.includes(:user).all
+  end
 end

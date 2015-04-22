@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'dashboard' => 'dashboards#index', as: :dashboard
   get 'home' => 'dashboards#home', as: :home
+  get 'all' => 'dashboards#all', as: :all
 
   get 'login' => 'sessions#new', as: :login
   post 'login' => 'sessions#create'

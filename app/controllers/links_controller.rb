@@ -1,3 +1,4 @@
+# Links controller class
 class LinksController < ApplicationController
   include LinksHelper
   include SessionsHelper
@@ -24,9 +25,9 @@ class LinksController < ApplicationController
     end
 
     if @link.save
-      redirect_to link_path(@link.short_url), notice: "URL added"
+      redirect_to link_path(@link.short_url), notice: 'URL added'
     else
-      flash[:error] = "Your URL was not valid"
+      flash[:error] = 'Your URL was not valid'
       redirect_to root_url
     end
   end
@@ -42,17 +43,18 @@ class LinksController < ApplicationController
 
   private
 
-    def find_link
-      @link = Link.find_by_short_url(params[:id])
-    end
+  def find_link
+    @link = Link.find_by_short_url(params[:id])
+  end
 
-    def link_params
-      params.require(:link).permit(:long_url, :tweet)
-    end
+  def link_params
+    params.require(:link).permit(:long_url, :tweet)
+  end
 
-    def create_tweet
-      if current_user && signed_in_through_twitter? && params[:link][:tweet] == '1'
-        current_user.tweet("Check out my new link: #{full_url(@link)}")
-      end
+  def create_tweet
+    if current_user && signed_in_through_twitter? && \
+       params[:link][:tweet] == '1'
+      current_user.tweet("Check out my new link: #{full_url(@link)}")
     end
+  end
 end

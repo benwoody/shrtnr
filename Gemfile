@@ -15,15 +15,20 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bcrypt-ruby'
 gem 'omniauth-twitter'
+gem 'twitter'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
-  gem 'spring'
+  gem 'spring', '1.3.4'
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara', '~> 2.4.0'
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'mailcatcher'
 end
 
+group :test do
+  gem 'webmock'
+end

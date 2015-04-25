@@ -22,7 +22,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'links/create'
-      get 'links/show' => 'api/links', as: :show
+      get 'links/show' => 'api/links'
+      get 'users/show' => 'api/users'
     end
   end
 

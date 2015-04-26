@@ -12,4 +12,21 @@ class Api::V1::LinksController < Api::BaseController
       render json: { errors: @link.errors }
     end
   end
+
+  def show
+    @link = @user.links.find_by_short_url(params[:short_url])
+    if @link
+      render json: { 
+        short_url: @link.short_url,
+        long_url: @link.long_url,
+        clicks: @link.clicks,
+        user: {
+          name: @user.name,
+          email: @user.email
+        }
+      }
+    else
+      render json: { error: "invalid resource id" }
+    end
+  end
 end

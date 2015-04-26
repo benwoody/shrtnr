@@ -16,6 +16,14 @@ class SettingsController < ApplicationController
     end
   end
 
+  def regenerate_api_key
+    if current_user.update_attributes(:api_key => SecureRandom.hex(16))
+      redirect_to settings_url, notice: "API Key Updated"
+    elsif
+      redirect_to settings_url, notice: "API Key Update Failed"
+    end     
+  end
+
   private
 
     def settings_params

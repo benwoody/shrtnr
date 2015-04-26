@@ -16,6 +16,16 @@ class SettingsController < ApplicationController
     end
   end
 
+  def regen_api_key
+    @settings = current_user
+    @settings.generate_api_key
+    if @settings.save
+      redirect_to settings_url, notice: "Successfully regenerated api key"
+    else
+      redirect_to settings_url, alert: "Failed to regenerate api key"
+    end
+  end
+
   private
 
     def settings_params

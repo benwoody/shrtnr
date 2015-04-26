@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/jjs0sbw/shrtnr.svg?branch=jjs_w4)](https://travis-ci.org/jjs0sbw/shrtnr)
 == Shortener
 
 This is a small URL shortening app for the Advanced Topics in Ruby on Rails class for the University of Washington.

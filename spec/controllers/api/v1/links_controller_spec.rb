@@ -5,7 +5,7 @@ describe Api::V1::LinksController, type: :controller do
   let(:link) { create(:link) }
   let(:user) { create(:user) }
 
-  describe "#create" do
+  describe '#create' do
     context  "with invalid api_key" do
       it "returns a 401" do
         get :create, api_key: 'blank', url: 'http://test.com'

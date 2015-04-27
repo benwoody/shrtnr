@@ -25,7 +25,7 @@
         <h6 class="text-center">Copy & Paste the following into your app:</h6>
         <pre class="text-center">http://shrtnr.com/api/v1/links/create?api_key=<%= @settings.api_key %>&url=%@</pre>
       </div>
-	  <%= button_to "Regenerate Key", {action: "regenerate_api_key"}, data: {confirm: "This will destroy your old API key, are you sure?" }, class: "btn btn-info btn-xl navbar-btn", method:"post"%>
+	  <%= button_to "Regenerate Key", {action: "regenerate_api_key"}, data: {confirm: "This will destroy your old API key, are you sure?" }, class: "btn btn-info btn-xl navbar-btn", method:"put"%>
     </div>
   </div>
 </div>

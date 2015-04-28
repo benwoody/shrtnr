@@ -24,6 +24,12 @@
         <h4 class="text-center">To use with other apps</h4>
         <h6 class="text-center">Copy & Paste the following into your app:</h6>
         <pre class="text-center">http://shrtnr.com/api/v1/links/create?api_key=<%= @settings.api_key %>&url=%@</pre>
+        <div class="actions">
+          <%= link_to "Regenerate API key", "settings/regen_api_key", 
+            method: :put,
+            data: { confirm: "Are you sure?  This will delete the existing key." },
+            class: "btn-lg btn-primary btn-block text-center" %>
+        </div>
       </div>
     </div>
   </div>

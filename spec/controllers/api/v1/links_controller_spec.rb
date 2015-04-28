@@ -7,7 +7,7 @@ describe Api::V1::LinksController, type: :controller do
 
   describe '#create' do
     context  "with invalid api_key" do
-      it "returns a 401" do
+      it 'returns a 401' do
         get :create, api_key: 'blank', url: 'http://test.com'
         expect(response.code).to eq '401'
       end

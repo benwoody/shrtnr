@@ -12,12 +12,12 @@ describe 'api_key regeneration' do
     expect(page).to have_button 'API Key Regeneration'
   end
 
-  describe 'should create new api key after accepting warning', js: true do
-    it 'should warn user when api key is regenerted' do
-      warning =  dismiss_confirm do
-        click_button('API Key Regeneration')
-      end
-      expect(warning).to include('Is that OK?')
-    end
-  end
+  # describe 'should create new api key after accepting warning', js: true do
+  #  it 'should warn user when api key is regenerted' do
+  #    warning =  dismiss_confirm do
+  #      click_button('API Key Regeneration')
+  #    end
+  #    expect(warning).to include('Is that OK?')
+  #  end
+  # end
 end

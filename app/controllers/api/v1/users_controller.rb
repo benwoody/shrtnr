@@ -1,5 +1,5 @@
 class Api::V1::UsersController < Api::BaseController
-  include UsersHelper
+  include LinksHelper
 
   before_action :authenticate_with_api_key
 
@@ -14,7 +14,7 @@ class Api::V1::UsersController < Api::BaseController
           name: @user.name,
           email: @user.email,
           links: @user.links.map { |link|
-            LinksCol.new link.short_url, link.long_url, link.clicks
+            LinksCol.new complete_url(link), link.long_url, link.clicks
           }
         }
       }

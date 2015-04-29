@@ -1,4 +1,5 @@
 require 'spec_helper'
+include LinksHelper
 
 describe Api::V1::UsersController, type: :controller do
 
@@ -42,14 +43,13 @@ describe Api::V1::UsersController, type: :controller do
         expect(json['user'].keys).to include 'links'
         expect(json['user']['links']).to be_kind_of(Array)
         expect(json['user']['links'][0].keys).to include 'short_url'
-        expect(json['user']['links'][0]['short_url']).to eq link.short_url
+        expect(json['user']['links'][0]['short_url']).to eq complete_url(link)
         expect(json['user']['links'][0].keys).to include 'long_url'
         expect(json['user']['links'][0]['long_url']).to eq link.long_url
         expect(json['user']['links'][0].keys).to include 'clicks'
         expect(json['user']['links'][0]['clicks']).to eq link.clicks
+puts json.to_json
       end
-      
-
     end
 
   end

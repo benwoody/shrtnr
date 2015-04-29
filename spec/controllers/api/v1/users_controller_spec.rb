@@ -48,7 +48,6 @@ describe Api::V1::UsersController, type: :controller do
         expect(json['user']['links'][0]['long_url']).to eq link.long_url
         expect(json['user']['links'][0].keys).to include 'clicks'
         expect(json['user']['links'][0]['clicks']).to eq link.clicks
-puts json.to_json
       end
     end
 

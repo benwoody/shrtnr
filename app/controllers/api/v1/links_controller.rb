@@ -14,8 +14,7 @@ class Api::V1::LinksController < Api::BaseController
   def show
     @link = Link.find(params[:id])
     @user = @link.user
-    render json:  { "short_url" => full_url(@link), "long_url" => @link.long_url, "clicks" => @link.clicks, "user" => {"name" => @user.name, "email" => @user.email}}
+    render :json => @link.as_json(:include =>[user: {only: [:name,:email]}])
   end
-  
   
 end

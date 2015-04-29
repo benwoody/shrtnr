@@ -15,6 +15,10 @@ class Link < ActiveRecord::Base
   def url
     long_url
   end
+  
+  def as_json(options={})
+    super(:only => [:short_url,:long_url,:clicks])
+  end
 
   private
 

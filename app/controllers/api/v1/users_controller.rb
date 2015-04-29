@@ -5,12 +5,7 @@ class Api::V1::UsersController < Api::BaseController
   
   def show
     @user = User.find(params[:id])
-    @links = []
-    @user.links.each do |link|
-      @links << JSON.parse(link.to_json(:only => [:short_url, :long_url, :clicks]))
-    end
-    
-    render json:  {:name => @user.name, :email => @user.email, :links => @links }
+    render :json => @user.as_json(:only => [:name,:email],:include =>[links: {only: [:short_url,:long_url,:clicks]}])
   end
   
 end

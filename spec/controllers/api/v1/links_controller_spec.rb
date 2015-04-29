@@ -41,4 +41,37 @@ describe Api::V1::LinksController, type: :controller do
       end
     end
   end
+
+  describe '#show' do
+    context 'using invalid api key' do
+      it 'returns a 401' do
+        get :show,  short_url: 'url_long', api_key: ' '
+        expect(response.code).to eq '401'
+      end
+    end
+
+    context 'using a valid api key and an invalid short url' do
+      before do
+        get :show, short_url: 'bad_url', api_key: user.api_key
+      end
+
+      it 'returns a json response containing an error' do
+        expect(response.body).to include 'error'
+      end
+    end
+
+    context 'using a valid api key and a valid short url' do
+      let(:json) { JSON.parse(response.body) }
+
+      before do
+        get :create, api_key: user.api_key, url: 'http://example.com'
+        short_url = JSON.parse(response.body)['shorturl'].split('/').last
+        get :show, short_url: short_url, api_key: user.api_key
+      end
+
+      it 'returns a json response with the long url' do
+        expect(json['long_url']).to include 'http://example.com'
+      end
+    end
+  end
 end

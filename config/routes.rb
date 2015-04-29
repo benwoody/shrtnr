@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'links/create'
-      get 'links/show/:short_url', to: :show
+      get 'links/show/:short_url', to: 'links#show'
     end
   end
 

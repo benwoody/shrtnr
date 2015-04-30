@@ -21,7 +21,10 @@ describe Api::V1::UserController, type: :controller do
       it 'returns a json response with a user key' do
         expect(json['user']).not_to be_empty
       end
-    end
 
+      it 'shows another test' do
+        expect('1').to eq '1'
+      end
+    end
   end
 end

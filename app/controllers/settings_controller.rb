@@ -21,4 +21,9 @@ class SettingsController < ApplicationController
     def settings_params
       params.require(:settings).permit(:name, :email)
     end
+
+  def regen
+    @settings.api_key.destroy
+    :generate_api_key
+  end
 end

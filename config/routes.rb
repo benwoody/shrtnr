@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   get 'auth/twitter/callback', to: 'sessions#twitter', as: :twitter_auth
   get 'auth/failure', to: 'sessions#failure'
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :destroy]
   get '/settings' => 'settings#index', as: :settings
   post '/settings' => 'settings#update'
+  post '/settings' => 'settings#regen'
 
   resources :links, only: [:create, :show, :redirection, :destroy]
 
@@ -22,6 +23,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'links/create'
+      get 'links/show'
+      get 'users/show'
     end
   end
 

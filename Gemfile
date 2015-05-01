@@ -27,6 +27,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'mailcatcher'
+  gem 'better_errors'
 end
 
 group :test do

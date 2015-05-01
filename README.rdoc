@@ -4,4 +4,8 @@ This is a small URL shortening app for the Advanced Topics in Ruby on Rails clas
 
 === Week 1
 
-(https://github.com/benwoody/shrtnr/wiki/Week-1)
+https://github.com/benwoody/shrtnr/wiki/Week-1
+
+=== Week 2
+
+https://github.com/benwoody/shrtnr/wiki/Week-2

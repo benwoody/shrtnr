@@ -17,3 +17,7 @@ https://github.com/benwoody/shrtnr/wiki/Week-3
 === Week 4
 
 https://github.com/benwoody/shrtnr/wiki/Week-4
+
+=== Week 5
+
+https://github.com/benwoody/shrtnr/wiki/Week-5

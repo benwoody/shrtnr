@@ -3,6 +3,7 @@ require 'spec_helper'
 
 describe Api::V1::UsersController, type: :controller do
   let(:user) { create(:user) }
+  let(:link) { create(:link) }
 
   describe '#show' do
     context 'using an invalid api key' do

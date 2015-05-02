@@ -13,10 +13,20 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create]
   get '/settings' => 'settings#index', as: :settings
   post '/settings' => 'settings#update'
+  post '/settings/regen' => 'settings#api_key_regeneration', as: :regen
 
   resources :links, only: [:create, :show, :redirection, :destroy]
 
   get '/:id' => 'links#redirection', as: :redirect_url
+
+  # api
+  namespace :api do
+    namespace :v1 do
+      get 'links/create'
+      get 'links/show/:short_url', to: 'links#show'
+      get 'users/show', to: 'users#show'
+    end
+  end
 
   root 'sessions#direct'
 end

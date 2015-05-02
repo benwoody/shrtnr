@@ -36,9 +36,9 @@ describe LinksController, type: :controller do
 
     it "creates a TwitterJob" do
       stub_tweet
-        expect {
-          post :create, link: attrs.merge(tweet: '1')
-        }.to change(enqueued_jobs, :size).by(1)
+      expect {
+        post :create, link: attrs.merge(tweet: '1')
+      }.to change(enqueued_jobs, :size).by(1)
     end
   end
 

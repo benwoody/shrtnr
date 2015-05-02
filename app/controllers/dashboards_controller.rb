@@ -12,6 +12,10 @@ class DashboardsController < ApplicationController
   end
 
   def all
-    @links = Link.includes(:user).all
+    respond_to do |format|
+      format.html { @links = Link.all }
+      # format.html { @links = Link.includes(:user).all }
+      format.json { @links = Link.all }
+    end
   end
 end

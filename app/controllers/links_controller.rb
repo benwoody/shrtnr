@@ -47,8 +47,7 @@ class LinksController < ApplicationController
   private
 
     def find_link
-      @link = Link.select(:short_url, :long_url, :updated_at, :clicks).
-                   find_by_short_url(params[:id])
+      @link = Link.find_by_short_url(params[:id])
     end
 
     def link_params

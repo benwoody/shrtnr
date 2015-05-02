@@ -21,10 +21,7 @@ describe UsersController, type: :controller do
     it "sends welcome email" do
       expect {
         post :create, user: attributes
-      }.to change(ActionMailer::Base.deliveries, :count).by(1)
-      # expect {
-      #   post :create, user: attributes
-      # }.to change(enqueued_jobs, :size).by(1)
+      }.to change(enqueued_jobs, :size).by(1)
     end
   end
 end

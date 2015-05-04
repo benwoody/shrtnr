@@ -1,4 +1,6 @@
 class Link < ActiveRecord::Base
+  attr_accessor :tweet, :url
+
   before_create :build_short_url
 
   belongs_to :user
@@ -6,8 +8,14 @@ class Link < ActiveRecord::Base
   validates :long_url, presence: true
   validates :long_url, format: { with: URI.regexp }, if: Proc.new { |a| a.long_url.present? }
 
+  scope :created_in_last_week, -> { where("created_at >= ?", 1.week.ago.utc).order(clicks: :desc).limit(5) }
+
   def to_params
     short_url
+  end
+
+  def url
+    long_url
   end
 
   private

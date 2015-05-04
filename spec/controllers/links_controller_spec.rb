@@ -9,13 +9,20 @@ describe LinksController, type: :controller do
   let(:user) { create(:user) }
   let(:attrs) { link.attributes }
 
-  describe "#create" do
-    it "changes count if long_url does not exist" do
-      attrs[:long_url] = "http://yahoo.com"
+  describe '#create' do
+    it 'changes count if long_url does not exist in the url list' do
+      attrs[:long_url] = 'http://yahoo.com'
       expect { post :create, link: attrs }.to change(Link, :count).by(1)
+      puts attrs[:long_url]
     end
 
-    it "redirects if long_url exists" do
+    it 'does not change count if long_url is empty' do
+      attrs[:long_url] = ''
+      expect { post :create, link: attrs }.to change(Link, :count).by(0)
+      puts attrs[:long_url]
+    end
+
+    it 'redirects if long_url exists' do
       post :create, link: attrs
       expect(response).to redirect_to link_path(link.short_url)
     end

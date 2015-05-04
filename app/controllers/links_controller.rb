@@ -51,9 +51,14 @@ class LinksController < ApplicationController
     end
 
     def create_tweet
-      if current_user && signed_in_through_twitter? && params[:link][:tweet] == '1'
-        text = "Check out my new link: #{full_url(@link)}"
-        TwitterJob.perform_later(current_user.id, text)
+      if @link != nil
+        if current_user && signed_in_through_twitter? && params[:link][:tweet] == '1'
+          text = "Check out my new link: #{full_url(@link)}"
+          TwitterJob.perform_later(current_user.id, text)
+        end
+      else
+        flash[:error] = "Your URL was not valid"
+        redirect_to root_url
       end
     end
 end

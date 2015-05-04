@@ -15,6 +15,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bcrypt-ruby'
 gem 'omniauth-twitter'
+gem 'twitter'
+
+gem 'foreman'
+gem 'sidekiq'
+gem 'whenever', :require => nil
+gem 'sinatra', :require => nil
 
 group :development, :test do
   gem 'byebug'
@@ -25,5 +31,9 @@ group :development, :test do
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'mailcatcher'
 end
 
+group :test do
+  gem 'webmock'
+end

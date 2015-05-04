@@ -15,6 +15,15 @@ else
   TWITTER.symbolize_keys!
 end
 
+# Configure Mandrill
+if Rails.env == 'production'
+  MANDRILL = { username: ENV['mandrill_username'], password: ENV['mandrill_password'] }
+else
+  MANDRILL = YAML.load(File.read(File.expand_path('../mandrill.yml', __FILE__)))
+  MANDRILL.merge! MANDRILL.fetch(Rails.env, {})
+  MANDRILL.symbolize_keys!
+end
+
 module Shortener
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -31,5 +40,8 @@ module Shortener
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Configure sidekiq as our queue adapter
+    config.active_job.queue_adapter = :sidekiq
   end
 end

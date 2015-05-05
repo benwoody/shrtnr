@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'webmock/rspec'
+require 'sidekiq/testing'
 
 describe UsersController, type: :controller do
   include ActiveJob::TestHelper
@@ -18,13 +20,13 @@ describe UsersController, type: :controller do
       expect { post :create, user: attributes }.to change(User, :count).by(1)
     end
 
-    it "sends welcome email" do
+    it 'sends welcome email' do
+      # expect {
+      #  post :create, user: attributes
+      # }.to change(ActionMailer::Base.deliveries, :count).by(1)
       expect {
         post :create, user: attributes
-      }.to change(ActionMailer::Base.deliveries, :count).by(1)
-      # expect {
-      #   post :create, user: attributes
-      # }.to change(enqueued_jobs, :size).by(1)
+      }.to change(enqueued_jobs, :size).by(1)
     end
   end
 end

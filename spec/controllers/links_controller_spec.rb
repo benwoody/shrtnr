@@ -23,7 +23,7 @@ describe LinksController, type: :controller do
     it 'has flash notice if long_url is empty' do
       attrs[:long_url] = ''
       post :create, link: attrs
-      expect(flash[:notice]).to be_present
+      expect(flash[:error]).to eq 'Your URL was not valid'
     end
 
     it 'redirects if long_url exists' do
@@ -66,21 +66,21 @@ describe LinksController, type: :controller do
     it 'does not create a TwitterJob with an empty long_url' do
       attrs[:long_url] = ''
       stub_tweet
-        expect {
-           post :create, link: attrs.merge(tweet: '1')
-         }.to change(enqueued_jobs, :size).by(0)
+      expect {
+        post :create, link: attrs.merge(tweet: '1')
+      }.to change(enqueued_jobs, :size).by(0)
     end
   end
 
-  describe "#show" do
-    it "is successful" do
+  describe '#show' do
+    it 'is successful' do
       get :show, id: link.short_url
       expect(response).to be_success
     end
   end
 
-  describe "#redirection" do
-    it "is successful" do
+  describe '#redirection' do
+    it 'is successful' do
       get :redirection, id: link.short_url
       expect(response).to redirect_to link.long_url
     end

@@ -1,9 +1,9 @@
+# Links controller class
 class LinksController < ApplicationController
   include LinksHelper
   include SessionsHelper
 
   before_action :find_link, only: [:show, :redirection]
-  after_action :create_tweet, only: [:create]
 
   def create
     url = Link.find_by_long_url(params[:link][:long_url])
@@ -24,9 +24,10 @@ class LinksController < ApplicationController
     end
 
     if @link.save
-      redirect_to link_path(@link.short_url), notice: "URL added"
+      create_tweet
+      redirect_to link_path(@link.short_url), notice: 'URL added'
     else
-      flash[:error] = "Your URL was not valid"
+      flash[:error] = 'Your URL was not valid'
       redirect_to root_url
     end
   end

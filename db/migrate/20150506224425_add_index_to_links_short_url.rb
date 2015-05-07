@@ -1,4 +1,4 @@
-class AddShortUrlKeyToLinks < ActiveRecord::Migration
+class AddIndexToLinksShortUrl < ActiveRecord::Migration
   def change
     add_index :links, :short_url
   end

@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150806224559) do
-=======
-ActiveRecord::Schema.define(version: 20150326015328) do
->>>>>>> add api/v1/links to work with 3rd party services
+ActiveRecord::Schema.define(version: 20150506224425) do
 
   create_table "links", force: :cascade do |t|
     t.string   "short_url"
@@ -26,10 +22,7 @@ ActiveRecord::Schema.define(version: 20150326015328) do
     t.integer  "user_id"
   end
 
-<<<<<<< HEAD
   add_index "links", ["short_url"], name: "index_links_on_short_url"
-=======
->>>>>>> add api/v1/links to work with 3rd party services
   add_index "links", ["user_id"], name: "index_links_on_user_id"
 
   create_table "users", force: :cascade do |t|

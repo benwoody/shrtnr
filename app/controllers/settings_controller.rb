@@ -9,7 +9,7 @@ class SettingsController < ApplicationController
 
   def update
     if @settings.update_attributes(settings_params)
-      redirect_to settings_url, notice: "Successfully updated settings"
+      respond_to :js
     else
       redirect_to settings_url, alert: "Failed to update settings"
     end
@@ -18,7 +18,8 @@ class SettingsController < ApplicationController
   def regenerate_key
     current_user.generate_api_key
     current_user.save
-    redirect_to settings_url, notice: "API key updated"
+    @updated_key = "http://shrtnr.com/api/v1/links/create?api_key=#{current_user.api_key}&url=%@"
+    respond_to :js
   end
 
   private

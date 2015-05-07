@@ -35,21 +35,21 @@ describe SettingsController do
 
     it "updates user settings" do
       attrs = { name: "New Name", email: "new@email.com" }
-      put :update, settings: attrs
+      xhr :put, :update, settings: attrs
       expect(assigns(:settings).name).to eq attrs[:name]
       expect(assigns(:settings).email).to eq attrs[:email]
     end
   end
 
-  describe "#update_api" do
+  describe "#regenerate_key" do
     before do
       sign_in user
     end
 
-    it "updates user's API" do
-      og_key = user.api_key
-      put :regenerate_key
-      expect(assigns(:settings).api_key).not_to eq og_key
+    it "regenerates user api_key" do
+      expect {
+        xhr :put, :regenerate_key
+      }.to change(user, :api_key)
     end
   end
 end

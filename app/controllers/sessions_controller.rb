@@ -28,4 +28,19 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to root_url, notice: "You have been logged out."
   end
+
+  def twitter
+    auth = request.env["omniauth.auth"]
+    if current_user
+      current_user.update_attribute(:uid, auth["uid"])
+      flash[:notice] = "You have now linked to your Twitter account."
+      redirect_to settings_path
+    else
+      if (User.where(uid: auth["uid"]).first || User.from_twitter(auth))
+        session[:user_id] = user.id
+        flash[:notice] = "You have logged-in through your Twitter account."
+        redirect_back_or root_url
+      end
+    end
+  end
 end

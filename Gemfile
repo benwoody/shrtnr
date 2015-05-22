@@ -22,13 +22,12 @@ gem 'whenever', require: nil
 gem 'sinatra', require: nil
 
 group :production do
-  # gem 'pg'
+  gem 'pg'
   gem 'rails_12factor'
 end
 
-  gem 'sqlite3'
 group :development, :test do
-  # gem 'sqlite3'
+  gem 'sqlite3'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'

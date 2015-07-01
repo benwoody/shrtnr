@@ -33,5 +33,10 @@ describe "creating a user" do
     it "tells the user they made a mistake" do
       expect(page).to have_content "Password confirmation doesn't match Password"
     end
+
+    it "sends them to users path" do
+      expect(current_path).to eq "/users"
+    end
+    
   end
 end

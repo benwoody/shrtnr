@@ -1,0 +1,14 @@
+/System/Library/Frameworks/Ruby.framework/Versions/2.0/usr/bin/ruby -r ./siteconf20150629-27054-1qinbtx.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling parser.c
+linking shared-object json/ext/parser.bundle
+ld: warning: directory not found for option '-L/usr/local/lib'
+ld: warning: directory not found for option '-L/usr/local/lib'
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 parser.bundle ./.gem.20150629-27054-3bkn0o/json/ext
+installing default parser libraries

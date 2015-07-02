@@ -39,5 +39,13 @@ describe SettingsController do
       expect(assigns(:settings).name).to eq attrs[:name]
       expect(assigns(:settings).email).to eq attrs[:email]
     end
+
+    #I supposed a bug here is that there's no way that I can think of
+    #to trigger the Failed alert because an invalid email brings up
+    #a notice on the page before it can redirect and alert
+
+    #On the same note, in updating settings, it seems like a valid
+    #email form with at least '@' is required, where there is no
+    #such validation when signing up initially
   end
 end

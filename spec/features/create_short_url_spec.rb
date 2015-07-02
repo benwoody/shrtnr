@@ -12,6 +12,11 @@ describe "creating a short url" do
       expect(page).to have_content "Your URL was not valid"
     end
 
+    it "fails if url is not given" do
+      click_button "Shorten It!"
+      expect(page).to have_content "Your URL was not valid"
+    end
+
     it "creates a short_url if valid" do
       fill_in "link[long_url]", with: "http://google.com"
       click_button "Shorten It!"
@@ -33,6 +38,11 @@ describe "creating a short url" do
       expect(page).to have_content "Your URL was not valid"
     end
 
+    it "fails if url is not given" do
+      click_button "Shorten It!"
+      expect(page).to have_content "Your URL was not valid"
+    end
+
     it "creates a short_url if valid" do
       fill_in "link[long_url]", with: "http://google.com"
       click_button "Shorten It!"
@@ -44,6 +54,12 @@ describe "creating a short url" do
       click_button "Shorten It!"
       visit "/dashboard"
       expect(page).to have_content "http://google.com"
+    end
+
+    it "doesn't add link to dashboard" do
+      fill_in "link[long_url]", with: "nonsense"
+      click_button "Shorten It!"
+      expect(page).to have_content "Your URL was not valid"
     end
   end
 end

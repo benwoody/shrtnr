@@ -10,6 +10,9 @@ class Link < ActiveRecord::Base
     short_url
   end
 
+  #def clicks
+  #end
+
   private
 
     def build_short_url

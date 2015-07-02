@@ -11,7 +11,6 @@ describe LinksController, type: :controller do
       attrs[:long_url] = "http://yahoo.com"
       expect { post :create, link: attrs }.to change(Link, :count).by(1)
     end
-
     it "redirects if long_url exists" do
       post :create, link: attrs
       expect(response).to redirect_to link_path(link.short_url)

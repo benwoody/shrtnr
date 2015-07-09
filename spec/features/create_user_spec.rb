@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "creating a user" do
   context "with valid params" do
-
     before do
       visit "/users/new"
       fill_in "Email", with: "test@test.com"
@@ -34,4 +33,29 @@ describe "creating a user" do
       expect(page).to have_content "Password confirmation doesn't match Password"
     end
   end
+
+  context "Duplicate user" do
+
+    before do
+      visit "/users/new"
+      fill_in "Email", with: "test@test.com"
+      fill_in "Password", with: "Password"
+      fill_in "Password confirmation", with: "Password"
+      click_button "Submit"
+      visit "/users/new"
+      fill_in "Email", with: "test@test.com"
+      fill_in "Password", with: "Password"
+      fill_in "Password confirmation", with: "Password"
+      click_button "Submit"
+    end
+
+    it "tells the user the email has already been taken" do
+      expect(page).to have_content "Email has already been taken"
+    end
+
+    it "stays on the sign up page" do
+      expect(current_path).to eq "/users"
+    end
+  end
+
 end

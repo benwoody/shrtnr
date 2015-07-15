@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :email
 
+
+# <<<<<<< HEAD
+#   # Comment!
+# =======
   def self.from_twitter(auth)
     create! do |user|
       user.name = auth.info.nickname
@@ -14,4 +18,5 @@ class User < ActiveRecord::Base
       user.password = SecureRandom.hex
     end
   end
+# >>>>>>> upstream/week2
 end

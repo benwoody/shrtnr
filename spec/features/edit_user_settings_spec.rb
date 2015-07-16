@@ -39,7 +39,7 @@ describe "editing user settings" do
     # app not currently validating email addresses
 
     it "should not accept null email address" do
-      fill_in "settings_email", with: "jack@handy.com"
+      fill_in "settings_email", with: ""
       click_button "Update"
       expect(page).to have_content "Failed to update settings"
     end

@@ -16,9 +16,13 @@ class User < ActiveRecord::Base
   end
 
   def update_with_twitter(auth)
-    self.name = auth.info.nickname if self.name.nil? || self.name.blank?
+    self.name = auth.info.nickname if name.nil? || name.blank?
     self.uid = auth.uid
 
     save!
+  end
+
+  def linked_with_twitter?
+    !(uid.nil? || uid.blank?)
   end
 end

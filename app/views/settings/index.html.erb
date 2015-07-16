@@ -20,7 +20,7 @@
           </div>
           <div class="actions">
             <%= f.submit "Update", class: "btn btn-lg btn-primary" %>
-            <% if @settings.uid.nil? || @settings.uid.blank? %>
+            <% if !@settings.linked_with_twitter? %>
             <%= link_to('Link Twitter Account', '/auth/twitter', class: 'btn btn-lg btn-primary pull-right') %>
             <% end %>
           </div>

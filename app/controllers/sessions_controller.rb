@@ -27,15 +27,31 @@ class SessionsController < ApplicationController
   def twitter
     # raise request.env["omniauth.auth"].to_yaml
     auth = request.env["omniauth.auth"]
-    user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
+    if signed_in?
+      user = current_user
+      user.update_with_twitter(auth)
+      notice = "Your account is now linked with your Twitter account."
+      redirect_url = settings_url
+    else
+      user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
+      notice = "You have been logged in through Twitter."
+      redirect_url = root_url
+    end
     session[:user_id] = user.id
-    flash[:notice] = "You have been logged in through Twitter."
-    redirect_back_or root_url
+    flash[:notice] = notice
+    redirect_back_or redirect_url
   end
 
   def failure
-    flash[:alert] = "Authentication Failed"
-    redirect_back_or root_url
+    if signed_in?
+      alert = "Unable to link your account with your Twitter account."
+      redirect_url = settings_url
+    else
+      alert = "Authentication Failed"
+      redirect_url = root_url
+    end
+    flash[:alert] = alert
+    redirect_back_or redirect_url
   end
 
   def destroy

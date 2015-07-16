@@ -14,4 +14,11 @@ class User < ActiveRecord::Base
       user.password = SecureRandom.hex
     end
   end
+
+  def update_with_twitter(auth)
+    self.name = auth.info.nickname if self.name.nil? || self.name.blank?
+    self.uid = auth.uid
+
+    save!
+  end
 end

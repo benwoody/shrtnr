@@ -27,10 +27,21 @@ class SessionsController < ApplicationController
   def twitter
     # raise request.env["omniauth.auth"].to_yaml
     auth = request.env["omniauth.auth"]
-    user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
-    session[:user_id] = user.id
-    flash[:notice] = "You have been logged in through Twitter."
-    redirect_back_or root_url
+    #if signed in through regular route
+    if(session[:user_id])
+      user = 
+      if User.find(session[:user_id]).update_attributes(:name => auth.info.nickname, :password => SecureRandom.hex)
+        redirect_to settings_url, notice: "Successfully updated settings with twitter information"
+      else
+        redirect_to settings_url, "Failed to update settings with twitter information"
+      end
+    #if signed in through twitter
+    else
+      user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
+      session[:user_id] = user.id
+      flash[:notice] = "You have been logged in through Twitter."
+      redirect_back_or root_url
+    end
   end
 
   def failure

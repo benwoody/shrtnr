@@ -27,7 +27,7 @@ describe SettingsController, type: :controller do
       end
     end
   end
-
+  
   describe "#update" do
     before do
       sign_in user

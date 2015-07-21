@@ -27,12 +27,16 @@ class SessionsController < ApplicationController
   def twitter
     # raise request.env["omniauth.auth"].to_yaml
     auth = request.env["omniauth.auth"]
+    if signed_in?
     user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
     session[:user_id] = user.id
     flash[:notice] = "You have been logged in through Twitter."
     redirect_back_or root_url
-  end
-
+    else
+    redirect_to home_path
+    end
+  end 
+ 
   def failure
     flash[:alert] = "Authentication Failed"
     redirect_back_or root_url

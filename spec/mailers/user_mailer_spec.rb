@@ -16,4 +16,17 @@ describe UserMailer, :type => :mailer do
       expect(mail.html_part.body).to include "You have successfully"
     end
   end
+
+  describe "#settings_email" do
+    let(:mail) { UserMailer.settings_email(user) }
+
+    it "Sends a settings update email" do
+      expect(mail.subject).to include "Your settings have been updated."
+    end
+
+    it "renders an html layout" do
+      expect(mail.html_part.body).to include "You have adjusted your settings"
+    end
+  end
+
 end

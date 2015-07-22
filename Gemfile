@@ -16,6 +16,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt-ruby'
 gem 'omniauth-twitter'
 gem 'twitter'
+gem 'mailcatcher'
 
 group :development, :test do
   gem 'byebug'

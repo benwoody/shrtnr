@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # oauth
   get 'auth/twitter/callback', to: 'sessions#twitter', as: :twitter_auth
   get 'auth/failure', to: 'sessions#failure'
-
+  
   resources :users, only: [:new, :create]
   get '/settings' => 'settings#index', as: :settings
   post '/settings' => 'settings#update'

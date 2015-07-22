@@ -22,3 +22,8 @@
 /config/secrets.yml
 /config/twitter.yml
 /config/mandril.yml
+
+# Ignore IDE files
+/.idea
+/.ruby-gemset
+/.ruby-version

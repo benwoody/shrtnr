@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
     end
   end
 
+
   def tweet(tweet)
     client = Twitter::REST::Client.new do |config|
       config.consumer_key        = TWITTER[:client_id]
@@ -26,4 +27,5 @@ class User < ActiveRecord::Base
     end
     client.update(tweet)
   end
+
 end

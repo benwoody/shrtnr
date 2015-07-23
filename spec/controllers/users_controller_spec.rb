@@ -6,7 +6,7 @@ describe UsersController, type: :controller do
   let(:attributes) { attributes_for :user }
 
   describe "#new" do
-    it "is successfull" do
+    it "is successful" do
       get :new
       expect(response).to be_success
     end

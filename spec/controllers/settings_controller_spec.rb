@@ -29,15 +29,22 @@ describe SettingsController, type: :controller do
   end
 
   describe "#update" do
+    let(:attrs) { {name: "New Name", email: "new@email.com"} }
+
     before do
       sign_in user
     end
 
     it "updates user settings" do
-      attrs = { name: "New Name", email: "new@email.com" }
       put :update, settings: attrs
       expect(assigns(:settings).name).to eq attrs[:name]
       expect(assigns(:settings).email).to eq attrs[:email]
+    end
+
+    it "sends settings changed email" do
+      expect {
+        put :update, settings: attrs
+      }.to change(ActionMailer::Base.deliveries, :count).by(1)
     end
   end
 end

@@ -1,6 +1,8 @@
 require 'securerandom'
 
 class User < ActiveRecord::Base
+  after_update :send_notification
+
   has_secure_password
 
   has_many :links
@@ -25,5 +27,11 @@ class User < ActiveRecord::Base
       config.access_token_secret = twitter_secret
     end
     client.update(tweet)
+  end
+
+  private
+
+  def send_notification
+    SettingsMailer.settings_changed_email(self).deliver_now unless changes.empty?
   end
 end

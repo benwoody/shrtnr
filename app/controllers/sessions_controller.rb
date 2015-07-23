@@ -27,9 +27,15 @@ class SessionsController < ApplicationController
   def twitter
     # raise request.env["omniauth.auth"].to_yaml
     auth = request.env["omniauth.auth"]
-    user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
-    session[:user_id] = user.id
-    flash[:notice] = "You have been logged in through Twitter."
+    if signed_in?
+      current_user.update name: auth.info.nickname, uid: auth.uid
+      session[:user_id] = current_user.uid
+      flash[:notice] = "Your Twitter account was linked."
+    else
+      user = User.where(uid: auth["uid"]).first || User.from_twitter(auth)
+      session[:user_id] = user.id
+      flash[:notice] = "You have been logged in through Twitter."
+    end
     redirect_back_or root_url
   end
 

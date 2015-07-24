@@ -1,7 +1,6 @@
 language: ruby
 rvm:
   - 2.2.1
-  - 2.2.2
 bundler_args: "--without development"
 notifications:
   slack: uwadvrails:mPwmK2QAQz4ROf5fHEhJCDnJ

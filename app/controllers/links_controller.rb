@@ -27,11 +27,15 @@ class LinksController < ApplicationController
       redirect_to link_path(@link.short_url), notice: "URL added"
     else
       flash[:error] = "Your URL was not valid"
-      redirect_to root_path
+      redirect_to root_url
     end
   end
 
   def show
+    # respond_to do |format|
+    #   format.json { render :json => { shorturl: @link.short_url, user: @link.user } }
+    #   format.xml { render :xml => { shorturl: @link.short_url, user: @link.user } }
+    # end
   end
 
   def redirection

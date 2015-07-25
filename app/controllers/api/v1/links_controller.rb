@@ -18,9 +18,10 @@ class Api::V1::LinksController < Api::BaseController
     @link = @user.links.build(param)
     if @link.save
       render json: { short_url: full_url(@link) ,
-                     long_url: @link.long_url,
+                      long_url: @link.long_url,
                       clicks: @link.clicks,
-                      user: @user }
+                      user: { name: @user.name, email: @user.email }
+                    }
     else
       render json: { errors: @link.errors }
     end

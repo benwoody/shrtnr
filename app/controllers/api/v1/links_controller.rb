@@ -12,4 +12,17 @@ class Api::V1::LinksController < Api::BaseController
       render json: { errors: @link.errors }
     end
   end
+
+  def show
+    param = { long_url: params[:url] }
+    @link = @user.links.build(param)
+    if @link.save
+      render json: { short_url: full_url(@link) ,
+                     long_url: @link.long_url,
+                      clicks: @link.clicks,
+                      user: @user }
+    else
+      render json: { errors: @link.errors }
+    end
+  end
 end

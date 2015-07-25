@@ -42,4 +42,49 @@ describe Api::V1::LinksController, type: :controller do
       end
     end
   end
+
+  describe "#show" do
+    context "with a valid api_key" do
+      let(:json) {JSON.parse(response.body) }
+
+      before do
+        get :show, api_key: user.api_key, url: 'http://test.com'
+      end
+
+      it "returns a JSON response" do
+        expect(response.content_type).to eq 'application/json'
+      end
+
+      it "returns correct JSON" do
+        expect(json.keys).to include 'short_url'
+        expect(json.keys).to include 'long_url'
+        expect(json.keys).to include 'clicks'
+        expect(json.keys).to include 'user'
+        puts json
+        expect(json[user].keys).to include 'email'
+        # expect(json.user.keys).to include 'email'
+      end
+
+    end
+
+    context "with an invalid url parameter" do
+      let(:json) { JSON.parse(response.body) }
+
+      before do
+        get :show, api_key: user.api_key, url: 'illformed url'
+      end
+
+      it "returns a JSON body with an error message" do
+        expect(response.body).to include '{"errors":{"long_url":["is invalid"]}}'
+      end
+    end
+
+    context  "with invalid api_key" do
+      it "returns a 401" do
+        get :show, api_key: 'blank', url: 'http://test.com'
+        expect(response.code).to eq '401'
+      end
+    end
+
+  end
 end

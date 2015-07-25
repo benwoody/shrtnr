@@ -60,9 +60,7 @@ describe Api::V1::LinksController, type: :controller do
         expect(json.keys).to include 'long_url'
         expect(json.keys).to include 'clicks'
         expect(json.keys).to include 'user'
-        puts json
         expect(json[user].keys).to include 'email'
-        # expect(json.user.keys).to include 'email'
       end
 
     end

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :show, :create]
   get '/settings' => 'settings#index', as: :settings
   post '/settings' => 'settings#update'
+  patch '/settings' => 'settings#patch'
 
   resources :links, only: [:create, :show, :redirection, :destroy]
 

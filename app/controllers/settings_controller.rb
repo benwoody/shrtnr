@@ -16,6 +16,13 @@ class SettingsController < ApplicationController
     end
   end
 
+  def patch
+    user = current_user
+    user.generate_api_key
+    user.save!
+    redirect_to settings_url, notice: "API key successfully generated"
+  end
+
   private
 
     def settings_params

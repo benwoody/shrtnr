@@ -18,9 +18,11 @@
 
   def update_api_key
     @settings = current_user
-    # need to confirm with user here
-    # @settings.update_api_key
-    @settings.generate_api_key
+    if @settings.generate_api_key
+      redirect_to settings_url, notice: 'Updated URL Key'
+    else
+      redirect_to settings_url, alert: "Failed to update api key"
+    end
   end
 
   private

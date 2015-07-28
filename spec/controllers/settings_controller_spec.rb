@@ -47,12 +47,9 @@ describe SettingsController do
     end
 
     it "generates a new api key" do
-      # new_key = user.generate_api_key
-      attrs = { api_key: user.generate_api_key }
-      # expect(user.api_key).to eq new_key  
-      put :update_api_key, settings: attrs
-      expect(assigns(:settings).api_key).to eq attrs[:api_key]
+      old_api_key = user.api_key
+      put :update_api_key
+      expect(assigns(:settings).api_key).not_to eq old_api_key 
     end
   end
-
 end

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/links/create'
       get '/links/:id', to: 'links#show'
+      get '/users/:id', to: 'users#show'
     end
   end
 

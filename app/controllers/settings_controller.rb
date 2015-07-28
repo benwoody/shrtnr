@@ -11,6 +11,7 @@ class SettingsController < ApplicationController
     @settings = current_user
     if @settings.update_attributes(settings_params)
       redirect_to settings_url, notice: "Successfully updated settings"
+      UserMailer.settings_email(@settings).deliver_now
     else
       redirect_to settings_url, alert: "Failed to update settings"
     end

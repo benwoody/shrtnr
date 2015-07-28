@@ -4,7 +4,9 @@ require 'spec_helper'
 describe Api::V1::UsersController, type: :controller do
 
   # let(:link) { create(:link) }
-  let(:user) { create(:user) }
+  # let(:user) { create(:user) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:link) { FactoryGirl.create(:link, user: user) } # this doesn't seem to create an associated link
 
   describe "#show" do
 
@@ -12,12 +14,13 @@ describe Api::V1::UsersController, type: :controller do
       let(:json) {JSON.parse(response.body) }
 
       before do
-        # user.link = FactoryGirl.build(:link)
+        # user.links.create(FactoryGirl.build(:link))
         get :show, api_key: user.api_key, id: user.id
         puts json
       end
 
       it "returns json" do
+        puts "json = #{json}"
         expect(json.keys).to include 'user'
         expect(json['user'].keys).to include 'name'
         expect(json['user'].keys).to include 'email'

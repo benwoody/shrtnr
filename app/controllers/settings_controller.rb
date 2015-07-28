@@ -1,4 +1,4 @@
-class SettingsController < ApplicationController
+  class SettingsController < ApplicationController
   include SessionsHelper
 
   before_action :authentication_required
@@ -14,6 +14,13 @@ class SettingsController < ApplicationController
     else
       redirect_to settings_url, alert: "Failed to update settings"
     end
+  end
+
+  def update_api_key
+    @settings = current_user
+    # need to confirm with user here
+    # @settings.update_api_key
+    @settings.generate_api_key
   end
 
   private

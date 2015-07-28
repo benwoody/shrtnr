@@ -6,13 +6,7 @@ class Api::V1::UsersController < Api::BaseController
   def show
     @user = User.find(params[:id])
     if @user.valid?
-      render json: { 
-        user: {
-          name: @user.name,
-          email: @user.email,
-          links: @user.links 
-        } 
-      }
+      render json: { user: @user }
     else
       render json: { errors: @link.errors }
     end

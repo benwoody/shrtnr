@@ -23,6 +23,12 @@
         <% if current_user.uid.nil? %>
           <%= button_to "Link Twitter Account", "auth/twitter", class: "btn-lg btn-info btn-block" %>
         <% end %>
+        <br>
+        <% if current_user.api_key.nil? %>
+          <%= button_to "Create API Key", new_api_path, class: "btn-lg btn-info btn-block" %>
+         <% else %>
+           <%= button_to "Regenerate API Key", new_api_path, class: "btn-lg btn-info btn-block", data: {confirm: "Are you sure?  This will obsolete previous keys."} %>
+        <% end %>
       </div>
       <div class="panel-body">
         <h4 class="text-center">To use with other apps</h4>

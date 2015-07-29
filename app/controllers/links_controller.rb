@@ -32,10 +32,11 @@ class LinksController < ApplicationController
   end
 
   def show
-    # respond_to do |format|
-    #   format.json { render :json => { shorturl: @link.short_url, user: @link.user } }
-    #   format.xml { render :xml => { shorturl: @link.short_url, user: @link.user } }
-    # end
+    respond_to do |format|
+      format.html
+      format.json { render :json => { shorturl: @link.short_url, longurl: @link.long_url, clicks: @link.clicks, user: @link.user}}
+      format.xml { render :xml => { shorturl: @link.short_url, user: @link.user } }
+    end
   end
 
   def redirection

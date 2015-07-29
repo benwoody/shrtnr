@@ -13,7 +13,11 @@ describe UserMailer, :type => :mailer do
     end
 
     it "renders an html layout" do
-      expect(mail.body).to include "You have successfully"
+      expect(mail.html_part.body).to include "You have successfully"
+    end
+
+    it "renders a text layout" do
+      expect(mail.text_part.body).to include "You have successfully"
     end
   end
 end

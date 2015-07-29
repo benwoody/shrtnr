@@ -15,6 +15,13 @@ class SettingsController < ApplicationController
       redirect_to settings_url, alert: "Failed to update settings"
     end
   end
+  
+  def regenerate_api
+    @settings = current_user
+    @settings.generate_api_key
+    @settings.save
+    redirect_to settings_url, notice: "Successfully updated settings"
+  end
 
   private
 

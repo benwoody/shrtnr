@@ -51,6 +51,6 @@ describe Api::V1::LinksController, type: :controller do
       it "returns a JSON response" do
         expect(response.content_type).to eq "application/json"
       end
-  end
+    end
   end
 end

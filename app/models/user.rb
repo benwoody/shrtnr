@@ -28,10 +28,6 @@ class User < ActiveRecord::Base
     client.update(tweet)
   end
 
-  # def as_json(options={})
-  #   super( { only: [:id, :name, :email]}.merge(options))
-  # end
-
   def generate_api_key
     self.api_key = SecureRandom.hex(16)
   end

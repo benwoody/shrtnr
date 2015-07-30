@@ -15,6 +15,13 @@ class SettingsController < ApplicationController
       redirect_to settings_url, alert: "Failed to update settings"
     end
   end
+  
+  def regenkey
+    @user = current_user
+    @user.generate_api_key
+    @user.save
+    redirect_to settings_url, alert: "Your api key has been updated, all previous key will be obsolete!"
+  end
 
   private
 

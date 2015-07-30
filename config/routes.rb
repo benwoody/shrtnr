@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :show, :create]
   get '/settings' => 'settings#index', as: :settings
   post '/settings' => 'settings#update'
+  put 'update_api_key' => 'settings#update_api_key'
 
   resources :links, only: [:create, :show, :redirection, :destroy]
 
@@ -22,6 +23,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'links/create'
+      get 'links/show'
+      get 'users/show'
     end
   end
 

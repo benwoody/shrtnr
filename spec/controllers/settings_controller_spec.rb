@@ -40,4 +40,16 @@ describe SettingsController do
       expect(assigns(:settings).email).to eq attrs[:email]
     end
   end
+
+  describe "#update_api_key" do
+    before do
+      sign_in user
+    end
+
+    it "generates a new api key" do
+      old_api_key = user.api_key
+      put :update_api_key
+      expect(assigns(:settings).api_key).not_to eq old_api_key 
+    end
+  end
 end

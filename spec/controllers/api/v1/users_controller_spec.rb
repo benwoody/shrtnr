@@ -25,7 +25,7 @@ describe Api::V1::UsersController, type: :controller do
         expect(json['user'].keys).to include 'name'
         expect(json['user'].keys).to include 'email'
         expect(json['user'].keys).to include 'links'
-        # expect(json['user']['links'].keys).to include 'short_url'
+        expect(json['user']['links'].first.keys).to include 'short_url'
         # expect(json['user']['links'].keys).to include 'long_url'
         # expect(json['user']['links'].keys).to include 'clicks'
       end

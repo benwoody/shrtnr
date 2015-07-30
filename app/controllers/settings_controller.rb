@@ -19,7 +19,7 @@
   def update_api_key
     @settings = current_user
     if @settings.generate_api_key
-      redirect_to settings_url, notice: 'Updated URL Key'
+      redirect_to settings_url, notice: 'Updated API Key'
     else
       redirect_to settings_url, alert: "Failed to update api key"
     end

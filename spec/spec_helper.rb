@@ -39,4 +39,9 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  # allow jbuilder views be rendered in rspec tests
+  #
+  # https://github.com/rails/jbuilder/issues/32
+  #config.render_views = true
 end

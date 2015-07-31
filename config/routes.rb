@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :show, :create]
   get '/settings' => 'settings#index', as: :settings
   post '/settings' => 'settings#update'
-  post '/settings/regenkey' => 'settings#regenkey'
+  post '/settings/regenkey' => 'settings#regenkey', as: :regenkey
 
   resources :links, only: [:create, :show, :redirection, :destroy]
 

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::V1::LinksController, type: :controller do
 
-  let(:link) { create(:link) }
+  let(:link) { create(:link, user_id: user.id) }
   let(:user) { create(:user) }
 
   describe "#create" do

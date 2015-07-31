@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Api::V1::LinksController, type: :controller do
 
-  let(:link) { create(:link) }
+  let(:link) { create(:link, user_id: user.id) }
   let(:user) { create(:user) }
 
   describe "#create" do
@@ -42,4 +42,58 @@ describe Api::V1::LinksController, type: :controller do
       end
     end
   end
+
+  describe "#show" do
+    context  "with invalid api_key" do
+      it "returns a 401" do
+        get :show, api_key: 'blank', id: link.short_url
+        expect(response.code).to eq '401'
+      end
+    end
+
+    context "with a valid api_key" do
+      let(:json) { JSON.parse(response.body) }
+
+      before do
+        get :show, api_key: user.api_key, id: link.short_url
+      end
+
+      it "returns a JSON response" do
+        expect(response.content_type).to eq "application/json"
+      end
+
+      it "returns a long url" do
+        expect(json.keys).to include 'long_url'
+        expect(json['long_url']).to eq link.long_url
+      end
+
+      it "returns click" do
+        expect(json.keys).to include 'clicks'
+        expect(json['clicks']).to eq link.clicks
+      end
+
+      it "returns user name" do
+        expect(json.keys).to include 'user'
+        expect(json['user']['name']).to eq user.name
+      end
+      
+      it "returns user email" do
+        expect(json.keys).to include 'user'
+        expect(json['user']['email']).to eq user.email
+      end
+    end
+
+    context "with an invalid url parameter" do
+      let(:json) { JSON.parse(response.body) }
+
+      before do
+        get :show, api_key: user.api_key, id: '12345'
+      end
+
+      it "returns a JSON body with an error message" do
+        expect(response.body).to include '{"errors":"invalid id"}'
+      end
+    end
+  end
+
 end

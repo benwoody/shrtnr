@@ -12,4 +12,22 @@ class Api::V1::LinksController < Api::BaseController
       render json: { errors: @link.errors }
     end
   end
+
+  def show
+    param = { id: params[:id] }
+    @link = Link.find_by_short_url(param[:id])
+    if @link
+      render json: { shorturl: @link.short_url,
+                    long_url: @link.long_url,
+                    clicks: @link.clicks,
+                    user:{
+                      name: @link.user.name,
+                      email: @link.user.email
+                    }   
+      }
+    else
+      render json: { errors: "invalid id" }
+    end
+  end
+
 end

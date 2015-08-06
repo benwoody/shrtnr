@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Api::V1::LinksController, type: :controller do
-<<<<<<< HEAD
   render_views
 
   let(:user) { create(:user) }
@@ -26,11 +25,6 @@ describe Api::V1::LinksController, type: :controller do
       end
     end
   end
-=======
-
-  let(:link) { create(:link) }
-  let(:user) { create(:user) }
->>>>>>> add api/v1/links to work with 3rd party services
 
   describe "#create" do
     context  "with invalid api_key" do

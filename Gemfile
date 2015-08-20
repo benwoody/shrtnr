@@ -21,11 +21,12 @@ gem 'sidekiq'
 gem 'whenever', require: nil
 gem 'sinatra', require: nil
 
-gem 'pg'
+gem 'sqlite3'
 
-group :production do
-  gem 'rails_12factor'
-end
+# group :production do
+#   gem 'rails_12factor'
+#   gem 'pg'
+# end
 
 group :development, :test do
   gem 'byebug'

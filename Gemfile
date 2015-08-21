@@ -24,7 +24,7 @@ gem 'sinatra', require: nil
 
 gem 'sqlite3'
 
-gem 'rails_12factor'
+# gem 'rails_12factor'
 # gem 'pg'
 
 group :development, :test do
